@@ -1,0 +1,27 @@
+<ion-header><!-- Cabecero de la página, título -->
+  <ion-toolbar>
+    <ion-buttons slot="start"><!-- Botón para abrir el menú lateral -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Datos maestros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"><!--Contenido de la página-->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)"><!--Refrescar la página cuando el usuario desplaza la pagina de arriba hacia abajo (ratón de mouse o el dedo)-->
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">datosMaestros</ion-title>
+    </ion-toolbar>
+    </ion-header>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>Usuarios</ion-col>
+        <ion-col><ion-button (click)="usuarios()">CREAR</ion-button></ion-col>
+        <ion-col><ion-button (click)="editarUsuarios()">EDITAR</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

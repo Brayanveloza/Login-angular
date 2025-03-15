@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { RestService } from './rest.service';
+import { GestorCookiesService } from './gestor-cookies.service';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -6,14 +9,23 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
+
+  isLoginPage = false;
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Admin', url: '/datos-maestro', icon: 'mail' },
+    { title: 'Cambio de contraseña', url: '/cambio-clave', icon: 'mail' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  
+  constructor(private cookies: GestorCookiesService, private route: Router) {
+    this.route.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isLoginPage = event.urlAfterRedirects === '/login'; // Detecta la ruta final
+      }
+    });
+  }
+  
+  logoff(){
+    this.cookies.closeSesion();
+    window.location.reload()
+  }
 }

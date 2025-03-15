@@ -1,5 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GestorCookiesService } from '../gestor-cookies.service';
+import { RestService } from '../rest.service';
 
 @Component({
   selector: 'app-folder',
@@ -8,11 +10,18 @@ import { ActivatedRoute } from '@angular/router';
   standalone: false,
 })
 export class FolderPage implements OnInit {
+
+  
+  public mensaje: any; 
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
-  constructor() {}
+  constructor(private coockieService: GestorCookiesService, private restService: RestService) {}
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.mensaje = this.coockieService.getUsuario()
+    //this.cargarElementos();
+    //console.log(this.cargarElementos())
   }
+
 }

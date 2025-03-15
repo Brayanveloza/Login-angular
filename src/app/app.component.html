@@ -1,10 +1,8 @@
 <ion-app>
-  <!-- Contenedor principal -->
   <ng-container *ngIf="isLoginPage; else mainApp">
     <ion-router-outlet id="login-content"></ion-router-outlet>
   </ng-container>
 
-  <!-- Contenido principal cuando NO es la página de login -->
   <ng-template #mainApp>
     <ion-split-pane contentId="main-content">
       <ion-menu contentId="main-content" type="overlay">
